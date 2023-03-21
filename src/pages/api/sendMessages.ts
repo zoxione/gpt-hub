@@ -15,9 +15,10 @@ export default async function handler(
     model: req.body.settings.model,
     messages: req.body.messages,
     temperature: req.body.settings.temperature,
+    max_tokens: req.body.settings.max_tokens,
+    top_p: req.body.settings.top_p,
     frequency_penalty: req.body.settings.frequency_penalty,
     presence_penalty: req.body.settings.presence_penalty,
-    max_tokens: req.body.settings.max_tokens,
   });
   res.status(200).json({ result: completion.data });
 }
