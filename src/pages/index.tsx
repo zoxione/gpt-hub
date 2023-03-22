@@ -41,7 +41,6 @@ const Home: NextPage = () => {
 
   const settingsHandler = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(settings);
   };
 
   const formHandler = async (e: React.FormEvent) => {
@@ -50,7 +49,6 @@ const Home: NextPage = () => {
 
     let messagesCopy = Object.assign([], messages);
     messagesCopy.push({ role: "user", content: message });
-    console.log(messagesCopy);
     setMessages(messagesCopy);
     setMessage("");
 
@@ -66,7 +64,6 @@ const Home: NextPage = () => {
       const data = await response.json();
       messagesCopy.push(data.result.choices[0].message);
       setMessages(messagesCopy);
-      console.log(messages);
     } else {
       setIsErrorSendMessages(true);
       let timeout = setTimeout(() => {
