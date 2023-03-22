@@ -8,7 +8,7 @@ interface IProps {
 const Markdown = (props: IProps) => {
   return (
     <ReactMarkdown
-      className="chat-bubble"
+      className=""
       components={{
         code({ node, inline, className, children, ...props }) {
           const match = /language-(\w+)/.exec(className || "");

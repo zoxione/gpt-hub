@@ -253,13 +253,27 @@ const Home: NextPage = () => {
 
         <div className="w-full max-w-xl mt-auto">
           <div className="max-h-[calc(100vh_-_220px)] w-full overflow-y-auto">
-            {/* <div className={"chat chat-start"}>
+            {/* <div className="chat chat-start">
               <div className="chat-header">You</div>
-              <div className="chat-bubble">{"dsada"}</div>
+              <div className="chat-bubble overflow-y-auto">
+                <Markdown content={"dasda"} />
+              </div>
             </div>
-            <div className={"chat chat-end"}>
+            <div className="chat chat-end">
               <div className="chat-header">You</div>
-              <div className="chat-bubble">{"dsada"}</div>
+              <div className="chat-bubble overflow-y-auto">
+                <Markdown content={"dasda"} />
+              </div>
+            </div>
+            <div className="chat chat-end">
+              <div className="chat-header">You</div>
+              <div className="chat-bubble overflow-y-auto">
+                <Markdown
+                  content={
+                    '\n\nКонечно, вот пример кода на Python:\n\n```\n# Программа для вычисления среднего арифметического двух чисел\n\nnum1 = float(input("Введите первое число: "))\nnum2 = float(input("Введите второе число: "))\n\naverage = (num1 + num2) / 2\n\nprint("Среднее арифметическое чисел", num1, "и", num2, "равно", average)\n```\n\n Эта программа запрашивает у пользователя два числа, вычисляет их среднее арифметичес'
+                  }
+                />
+              </div>
             </div> */}
             {messages.map((item, index) => (
               <div key={index}>
@@ -271,7 +285,9 @@ const Home: NextPage = () => {
                   <div className="chat-header">
                     {item.role === "assistant" ? "GPT" : "You"}
                   </div>
-                  <Markdown content={item.content} />
+                  <div className="chat-bubble overflow-y-auto">
+                    <Markdown content={item.content} />
+                  </div>
                 </div>
               </div>
             ))}

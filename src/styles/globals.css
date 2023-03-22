@@ -9,3 +9,7 @@ body {
 div[id="__next"] {
   height: 100%;
 }
+
+.chat-end .chat-bubble:before {
+  left: 0;
+}
