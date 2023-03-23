@@ -294,14 +294,14 @@ const Home: NextPage = () => {
             <progress className="progress w-full h-[80px] my-6"></progress>
           ) : (
             <form
-              className="my-6 flex flex-col w-full h-[80px] flex-grow relative border border-black/10 bg-white dark:border-gray-900/50 dark:text-white dark:bg-gray-700 rounded-md shadow-[0_0_10px_rgba(0,0,0,0.10)] dark:shadow-[0_0_15px_rgba(0,0,0,0.10)]"
+              className="my-6 flex flex-col w-full h-[80px] flex-grow relative border border-gray-900/50 :text-white bg-gray-700 rounded-md shadow-[0_0_15px_rgba(0,0,0,0.10)]"
               onSubmit={(e: React.FormEvent) => formHandler(e)}
             >
               <textarea
                 tabIndex={0}
                 data-id="root"
                 rows={1}
-                className="m-0 p-3 w-full h-full resize-none border-0 bg-transparent focus:ring-0 focus-visible:ring-0 dark:bg-transparent outline-none"
+                className="m-0 p-3 w-full h-full resize-none border-0 focus:ring-0 focus-visible:ring-0 bg-transparent outline-none"
                 value={message}
                 onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
                   setMessage(e.target.value)
@@ -314,7 +314,7 @@ const Home: NextPage = () => {
               />
               <button
                 type="submit"
-                className="absolute p-1 rounded-md text-gray-500 bottom-1.5 right-1 md:bottom-2.5 md:right-2 hover:bg-gray-100 dark:hover:text-gray-400 dark:hover:bg-gray-900 disabled:hover:bg-transparent dark:disabled:hover:bg-transparent"
+                className="absolute p-1 rounded-md text-gray-500 bottom-1.5 right-1 md:bottom-2.5 md:right-2 hover:text-gray-400 hover:bg-gray-900 disabled:hover:bg-transparent"
               >
                 <svg
                   stroke="currentColor"
