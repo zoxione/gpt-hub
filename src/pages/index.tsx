@@ -2,6 +2,7 @@ import React from "react";
 import type { NextPage } from "next";
 import { MdErrorOutline } from "react-icons/md";
 import Link from "next/link";
+import { IoMdSettings } from "react-icons/io";
 
 import Layout from "@/components/Layout";
 import Markdown from "@/components/Markdown";
@@ -29,6 +30,7 @@ const Home: NextPage = () => {
     React.useState<boolean>(false);
   const [isSubmitting, setIsSubmitting] = React.useState<boolean>(false);
 
+  // Дефолтные настройки
   const [settings, setSettings] = React.useState<ISettings>({
     apiKey: "",
     model: "gpt-3.5-turbo",
@@ -39,10 +41,12 @@ const Home: NextPage = () => {
     presence_penalty: 0,
   });
 
+  // Смена настроек
   const settingsHandler = (e: React.FormEvent) => {
     e.preventDefault();
   };
 
+  // Отправка сообщения
   const formHandler = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -75,178 +79,206 @@ const Home: NextPage = () => {
     setIsSubmitting(false);
   };
 
+  // Форма
+  const FormSettings = (
+    <form
+      onChange={(e: React.FormEvent) => settingsHandler(e)}
+      className="form-control flex flex-col gap-4"
+    >
+      <div>
+        <label className="label">
+          <span className="label-text">
+            Enter the{" "}
+            <Link className="link link-info" href={"/help"}>
+              api key (?)
+            </Link>
+          </span>
+        </label>
+        <input
+          type="text"
+          className="input input-bordered w-full"
+          value={settings.apiKey}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setSettings({
+              ...settings,
+              ...{ apiKey: e.target.value },
+            })
+          }
+        />
+      </div>
+      <div>
+        <label className="label">
+          <span className="label-text">Model</span>
+        </label>
+        <select
+          className="select select-bordered w-full"
+          value={settings.model}
+          onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+            setSettings({
+              ...settings,
+              ...{ model: e.target.value },
+            })
+          }
+        >
+          <option disabled className="text-base-300">
+            gpt-4
+          </option>
+          <option disabled className="text-base-300">
+            gpt-4-0314
+          </option>
+          <option disabled className="text-base-300">
+            gpt-4-32k
+          </option>
+          <option disabled className="text-base-300">
+            gpt-4-32k-0314
+          </option>
+          <option>gpt-3.5-turbo</option>
+          <option>gpt-3.5-turbo-0301</option>
+        </select>
+      </div>
+      <div>
+        <label className="label">
+          <span className="label-text">Temperature</span>
+        </label>
+        <input
+          type="range"
+          className="range range-primary"
+          min={0}
+          max={1}
+          step={0.01}
+          value={settings.temperature}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setSettings({
+              ...settings,
+              ...{ temperature: parseFloat(e.target.value) },
+            })
+          }
+        />
+        <label className="label">
+          <span className="label-text-alt">{settings.temperature}</span>
+        </label>
+      </div>
+      <div>
+        <label className="label">
+          <span className="label-text">Max tokens</span>
+        </label>
+        <input
+          type="range"
+          className="range range-primary"
+          min={1}
+          max={2048}
+          value={settings.max_tokens}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setSettings({
+              ...settings,
+              ...{ max_tokens: parseInt(e.target.value, 10) },
+            })
+          }
+        />
+        <label className="label">
+          <span className="label-text-alt">{settings.max_tokens}</span>
+        </label>
+      </div>
+      <div>
+        <label className="label">
+          <span className="label-text">Top P</span>
+        </label>
+        <input
+          type="range"
+          className="range range-primary"
+          min={0}
+          max={1}
+          step={0.01}
+          value={settings.top_p}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setSettings({
+              ...settings,
+              ...{ top_p: parseFloat(e.target.value) },
+            })
+          }
+        />
+        <label className="label">
+          <span className="label-text-alt">{settings.top_p}</span>
+        </label>
+      </div>
+      <div>
+        <label className="label">
+          <span className="label-text">Frequency penalty</span>
+        </label>
+        <input
+          type="range"
+          className="range range-primary"
+          min={0}
+          max={2}
+          step={0.01}
+          value={settings.frequency_penalty}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setSettings({
+              ...settings,
+              ...{ frequency_penalty: parseFloat(e.target.value) },
+            })
+          }
+        />
+        <label className="label">
+          <span className="label-text-alt">{settings.frequency_penalty}</span>
+        </label>
+      </div>
+      <div>
+        <label className="label">
+          <span className="label-text">Presence penalty</span>
+        </label>
+        <input
+          type="range"
+          className="range range-primary"
+          min={0}
+          max={2}
+          step={0.01}
+          value={settings.presence_penalty}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setSettings({
+              ...settings,
+              ...{ presence_penalty: parseFloat(e.target.value) },
+            })
+          }
+        />
+        <label className="label">
+          <span className="label-text-alt">{settings.presence_penalty}</span>
+        </label>
+      </div>
+    </form>
+  );
+
   return (
     <>
       <AppHead />
 
       <div className="h-full w-full grid gap-4 grid-cols-1 lg:grid-cols-2 justify-items-center">
-        <form
-          onChange={(e: React.FormEvent) => settingsHandler(e)}
-          className="form-control w-full max-w-xl flex flex-col gap-4"
-        >
-          <h3 className="text-center text-xl font-bold">GPT Settings</h3>
-          <div>
-            <label className="label">
-              <span className="label-text">
-                Enter the{" "}
-                <Link className="link link-info" href={"/help"}>
-                  api key (?)
-                </Link>
-              </span>
-            </label>
-            <input
-              type="text"
-              className="input input-bordered w-full"
-              value={settings.apiKey}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setSettings({ ...settings, ...{ apiKey: e.target.value } })
-              }
-            />
-          </div>
-          <div>
-            <label className="label">
-              <span className="label-text">Model</span>
-            </label>
-            <select
-              className="select select-bordered w-full"
-              value={settings.model}
-              onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
-                setSettings({
-                  ...settings,
-                  ...{ model: e.target.value },
-                })
-              }
+        <div className="lg:hidden flex flex-row items-center justify-between w-full max-w-xl gap-2 mb-12">
+          <h1 className="text-3xl font-bold">GPT HUB</h1>
+          <label htmlFor="modal-settings" className="btn gap-2">
+            <IoMdSettings size={18} />
+            Open settings
+          </label>
+        </div>
+
+        <input type="checkbox" id="modal-settings" className="modal-toggle" />
+        <div className="modal">
+          <div className="modal-box relative">
+            <label
+              htmlFor="modal-settings"
+              className="btn btn-sm btn-circle absolute right-2 top-2"
             >
-              <option disabled className="text-base-300">
-                gpt-4
-              </option>
-              <option disabled className="text-base-300">
-                gpt-4-0314
-              </option>
-              <option disabled className="text-base-300">
-                gpt-4-32k
-              </option>
-              <option disabled className="text-base-300">
-                gpt-4-32k-0314
-              </option>
-              <option>gpt-3.5-turbo</option>
-              <option>gpt-3.5-turbo-0301</option>
-            </select>
+              ✕
+            </label>
+            <h3 className="text-xl font-bold">GPT Settings</h3>
+            <p className="py-4">{FormSettings}</p>
           </div>
-          <div>
-            <label className="label">
-              <span className="label-text">Temperature</span>
-            </label>
-            <input
-              type="range"
-              className="range range-primary"
-              min={0}
-              max={1}
-              step={0.01}
-              value={settings.temperature}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setSettings({
-                  ...settings,
-                  ...{ temperature: parseFloat(e.target.value) },
-                })
-              }
-            />
-            <label className="label">
-              <span className="label-text-alt">{settings.temperature}</span>
-            </label>
-          </div>
-          <div>
-            <label className="label">
-              <span className="label-text">Max tokens</span>
-            </label>
-            <input
-              type="range"
-              className="range range-primary"
-              min={1}
-              max={2048}
-              value={settings.max_tokens}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setSettings({
-                  ...settings,
-                  ...{ max_tokens: parseInt(e.target.value, 10) },
-                })
-              }
-            />
-            <label className="label">
-              <span className="label-text-alt">{settings.max_tokens}</span>
-            </label>
-          </div>
-          <div>
-            <label className="label">
-              <span className="label-text">Top P</span>
-            </label>
-            <input
-              type="range"
-              className="range range-primary"
-              min={0}
-              max={1}
-              step={0.01}
-              value={settings.top_p}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setSettings({
-                  ...settings,
-                  ...{ top_p: parseFloat(e.target.value) },
-                })
-              }
-            />
-            <label className="label">
-              <span className="label-text-alt">{settings.top_p}</span>
-            </label>
-          </div>
-          <div>
-            <label className="label">
-              <span className="label-text">Frequency penalty</span>
-            </label>
-            <input
-              type="range"
-              className="range range-primary"
-              min={0}
-              max={2}
-              step={0.01}
-              value={settings.frequency_penalty}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setSettings({
-                  ...settings,
-                  ...{ frequency_penalty: parseFloat(e.target.value) },
-                })
-              }
-            />
-            <label className="label">
-              <span className="label-text-alt">
-                {settings.frequency_penalty}
-              </span>
-            </label>
-          </div>
-          <div>
-            <label className="label">
-              <span className="label-text">Presence penalty</span>
-            </label>
-            <input
-              type="range"
-              className="range range-primary"
-              min={0}
-              max={2}
-              step={0.01}
-              value={settings.presence_penalty}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setSettings({
-                  ...settings,
-                  ...{ presence_penalty: parseFloat(e.target.value) },
-                })
-              }
-            />
-            <label className="label">
-              <span className="label-text-alt">
-                {settings.presence_penalty}
-              </span>
-            </label>
-          </div>
-        </form>
+        </div>
+
+        <div className="hidden lg:block w-full max-w-xl">
+          <h3 className="text-xl font-bold text-center">GPT Settings</h3>
+          {FormSettings}
+        </div>
 
         <div className="w-full max-w-xl mt-auto">
           <div className="max-h-[calc(100vh_-_220px)] w-full overflow-y-auto">

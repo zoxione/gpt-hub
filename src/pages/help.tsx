@@ -21,7 +21,7 @@ const Help: NextPage = () => {
       </div>
 
       <div className="grid gap-10 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        <div className="card bg-primary text-primary-content">
+        <div className="card bg-neutral text-primary-content">
           <div className="card-body">
             <h2 className="card-title">Где взять api key?</h2>
             <ol className="list-decimal pl-[20px]">
@@ -51,13 +51,13 @@ const Help: NextPage = () => {
               </li>
               <li>
                 Нажмите на кнопку{" "}
-                <span className="badge">Create new secret key</span>.
+                <span className="badge bg-primary">Create new secret key</span>.
               </li>
               <li>Скопируйте ключ и вставьте его в поле.</li>
             </ol>
           </div>
         </div>
-        <div className="card bg-primary text-primary-content">
+        <div className="card bg-neutral text-primary-content">
           <div className="card-body">
             <h2 className="card-title">Что такое model?</h2>
             <p>
@@ -66,7 +66,7 @@ const Help: NextPage = () => {
             </p>
           </div>
         </div>
-        <div className="card bg-primary text-primary-content">
+        <div className="card bg-neutral text-primary-content">
           <div className="card-body">
             <h2 className="card-title">Что такое temperature?</h2>
             <p>
@@ -78,7 +78,7 @@ const Help: NextPage = () => {
             </p>
           </div>
         </div>
-        <div className="card bg-primary text-primary-content">
+        <div className="card bg-neutral text-primary-content">
           <div className="card-body">
             <h2 className="card-title">Что такое max tokens?</h2>
             <p>
@@ -88,7 +88,7 @@ const Help: NextPage = () => {
             </p>
           </div>
         </div>
-        <div className="card bg-primary text-primary-content">
+        <div className="card bg-neutral text-primary-content">
           <div className="card-body">
             <h2 className="card-title">Что такое top p?</h2>
             <p>
@@ -100,7 +100,7 @@ const Help: NextPage = () => {
             </p>
           </div>
         </div>
-        <div className="card bg-primary text-primary-content">
+        <div className="card bg-neutral text-primary-content">
           <div className="card-body">
             <h2 className="card-title">Что такое frequency penalty?</h2>
             <p>
@@ -110,7 +110,7 @@ const Help: NextPage = () => {
             </p>
           </div>
         </div>
-        <div className="card bg-primary text-primary-content">
+        <div className="card bg-neutral text-primary-content">
           <div className="card-body">
             <h2 className="card-title">Что такое presence penalty?</h2>
             <p>

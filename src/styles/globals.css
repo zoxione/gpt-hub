@@ -4,10 +4,14 @@
 
 body {
   height: 100vh;
+  padding: 0;
+  margin: 0;
 }
 
 div[id="__next"] {
   height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .chat-end .chat-bubble:before {
